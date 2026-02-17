@@ -37,10 +37,10 @@ function update(event){
 
 function iniciarJogo(){
     // Delimita os limites e liga as bordas entre si
-    if (snake[0].x > 15*box && direction == "right") snake[0].x = 0;
-    if (snake[0].x < 0 && direction == "left") snake[0].x = 16*box;
-    if (snake[0].y > 15*box && direction == "down") snake[0].y = 0;
-    if (snake[0].y < 0 && direction == "up") snake[0].y = 16*box;
+    if (snake[0].x > 15*box && direction === "right") snake[0].x = 0;
+    if (snake[0].x < 0 && direction === "left") snake[0].x = 16*box;
+    if (snake[0].y > 15*box && direction === "down") snake[0].y = 0;
+    if (snake[0].y < 0 && direction === "up") snake[0].y = 16*box;
 
     criarBG();
     criarCobrinha();
@@ -67,4 +67,4 @@ function iniciarJogo(){
 // *********** Execuções ***************
 
 // Comando para a cada 1 milisegundo a função iniciarjogo() ser executada
-let jogo = setInterval(iniciarJogo,500);
+let jogo = setInterval(iniciarJogo,100);
