@@ -8,6 +8,13 @@ snake[0] = {
     y:8*box
 }
 let direction = "right";
+// Array para randomizar a coordenada de geracao da comida
+let food = {
+    //Math.floor - retira o ponto flutuante do valor Math.random
+    //Math.random gera numeros entre 0 e 1 
+    x:Math.floor(Math.random()*15+1)*box,
+    y:Math.floor(Math.random()*15+1)*box    
+}
 
 // ***** Delimitação do background *****
 function criarBG(){
@@ -21,6 +28,13 @@ function criarCobrinha(){
         context.fillRect(snake[i].x,snake[i].y,box,box);
     }
 }
+
+// ******* Criar para a comida *******
+function criarComidinha(){
+    context.fillStyle= "red";
+    context.fillRect(food.x,food.y,box,box)
+}
+
 // ***** Gerar o evento de escuta *****
 // escutar o evento de pressionar as teclas do teclado
 document.addEventListener('keydown',update);
@@ -44,6 +58,7 @@ function iniciarJogo(){
 
     criarBG();
     criarCobrinha();
+    criarComidinha();
 
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
