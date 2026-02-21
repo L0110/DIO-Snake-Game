@@ -1,0 +1,24 @@
+body{
+    height: 95vh;
+    width: 95;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    color: rgb(0, 165, 0);
+    background-color: rgb(0, 58, 0);
+}
+
+canvas{
+    border: 8px solid rgb(94, 84, 0);
+    border-radius: 8px;
+}
+
+.titulo{
+    corner-shape: notch bevel;
+    border: 16px solid black;
+    border-radius: 10px;
+    background-color: black;
+
+}

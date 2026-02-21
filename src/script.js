@@ -47,21 +47,29 @@ function update(event){
     if (event.keyCode === 40 && direction != "up") direction = "down";
 }
 
+function msgGameOver(){
+    clearInterval(jogo);
+    alert("🐍 Game over 🐍");
+}
+
 // ***** Gerar movimento da cobrinha ***
 
 function iniciarJogo(){
 
     // Delimita os limites e liga as bordas entre si
-    if (snake[0].x > 15*box && direction === "right") snake[0].x = 0;
-    if (snake[0].x < 0 && direction === "left") snake[0].x = 16*box;
-    if (snake[0].y > 15*box && direction === "down") snake[0].y = 0;
-    if (snake[0].y < 0 && direction === "up") snake[0].y = 16*box;
+    // if (snake[0].x > 15*box && direction === "right") snake[0].x = 0;
+    // if (snake[0].x < 0 && direction === "left") snake[0].x = 16*box;
+    // if (snake[0].y > 15*box && direction === "down") snake[0].y = 0;
+    // if (snake[0].y < 0 && direction === "up") snake[0].y = 16*box;
+    if (snake[0].x >= 16 * box && direction === "right") msgGameOver();
+    if (snake[0].x <= -1 && direction === "left") msgGameOver();
+    if (snake[0].y >= 16 * box && direction === "down") msgGameOver();
+    if (snake[0].y <= -1 && direction === "up") msgGameOver();
     
     // i sendo comparado com o tamanho da cobrinha  
     for (i=1; i< snake.length; i++){
         if (snake[0].x === snake[i].x && snake[0].y === snake[i].y){
-            clearInterval(jogo);
-            alert("🐍 Game over 🐍");
+            msgGameOver()
         }
     }
 
