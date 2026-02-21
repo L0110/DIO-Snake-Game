@@ -23,7 +23,7 @@ function criarBG(){
 }
 // ******* Criar para a cobrinha *******
 function criarCobrinha(){
-    for(i=0;i<snake.length;i++){
+    for(i=0;i < snake.length ;i++){
         context.fillStyle="green";
         context.fillRect(snake[i].x,snake[i].y,box,box);
     }
@@ -32,7 +32,7 @@ function criarCobrinha(){
 // ******* Criar para a comida *******
 function criarComidinha(){
     context.fillStyle= "red";
-    context.fillRect(food.x,food.y,box,box)
+    context.fillRect(food.x, food.y, box, box)
 }
 
 // ***** Gerar o evento de escuta *****
@@ -41,20 +41,29 @@ document.addEventListener('keydown',update);
 
 function update(event){
     // 37 : Esquerda | 38 : Cima | 39 : Direita | 40: Baixo
-    if (event.keyCode == 37 && direction != "right") direction = "left";
-    if (event.keyCode == 38 && direction != "down") direction = "up";
-    if (event.keyCode == 39 && direction != "left") direction = "right";
-    if (event.keyCode == 40 && direction != "up") direction = "down";
+    if (event.keyCode === 37 && direction != "right") direction = "left";
+    if (event.keyCode === 38 && direction != "down") direction = "up";
+    if (event.keyCode === 39 && direction != "left") direction = "right";
+    if (event.keyCode === 40 && direction != "up") direction = "down";
 }
 
 // ***** Gerar movimento da cobrinha ***
 
 function iniciarJogo(){
+
     // Delimita os limites e liga as bordas entre si
     if (snake[0].x > 15*box && direction === "right") snake[0].x = 0;
     if (snake[0].x < 0 && direction === "left") snake[0].x = 16*box;
     if (snake[0].y > 15*box && direction === "down") snake[0].y = 0;
     if (snake[0].y < 0 && direction === "up") snake[0].y = 16*box;
+    
+    // i sendo comparado com o tamanho da cobrinha  
+    for (i=1; i< snake.length; i++){
+        if (snake[0].x === snake[i].x && snake[0].y === snake[i].y){
+            clearInterval(jogo);
+            alert("🐍 Game over 🐍");
+        }
+    }
 
     criarBG();
     criarCobrinha();
@@ -67,8 +76,15 @@ function iniciarJogo(){
     if (direction == "left") snakeX -= box; 
     if (direction == "up") snakeY -= box; 
     if (direction == "down") snakeY += box;
-    // Remove o elemento anterior do array
-    snake.pop();
+    //Verifica a coordenada da cobrinha e da comidinha para gerar uma nova comidinha em outra coordenada
+    if(snakeX != food.x || snakeY != food.y){
+        // Remove o elemento anterior do array 
+        snake.pop(); 
+    }else{
+        food.x = Math.floor(Math.random()*15+1)*box;
+        food.y = Math.floor(Math.random()*15+1)*box;
+    }
+
     // Criando a cabeça da cobra
     let newHead = {
         x: snakeX,
@@ -81,5 +97,5 @@ function iniciarJogo(){
 
 // *********** Execuções ***************
 
-// Comando para a cada 1 milisegundo a função iniciarjogo() ser executada
+// Comando para a cada 1 milisegundo, a função iniciarjogo() ser executada
 let jogo = setInterval(iniciarJogo,100);
